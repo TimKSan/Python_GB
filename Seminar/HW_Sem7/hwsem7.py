@@ -11,40 +11,51 @@
 # **Ввод:** пара-ра-рам рам-пам-папам па-ра-па-да    
 #     **Вывод:** Парам пам-пам 
 
-#poem = 'пара-ра-рам рам-пам-папам па-ра-па-да'
-# poem_list = list(poem.split(' '))
-# vowels_list = []
 
-
-# # for i in range(len(poem_list)):
-# #     vowels_list.append(poem_list[i].replace('а', 'Ж'))
-# # #     #vowels_list.append(j.replace(j, ''))
-# for i in range(len(poem)):
-#     if poem[i] == 'а' or poem[i] == ' ':
-#         vowels_list.append(poem[i])
-#     else: continue
-
-# join_vowels = ''.join(vowels_list)
-# join_list = list(join_vowels.split(' '))
-
-
-# print(len(join_list[]))
-
-# while i < len(poem_list) - 1:
-#     if poem_list[i] == poem_list[i+1]:
-#         print('Парам пам-пам')
-#     else: print('Пам парам')
-#     i += 1
 
 poem = 'пара-ра-рам рам-пам-папам па-ра-па-да па-ра-па-да па-ра-па-да пара-ра-рам пара-ра-рам'
 
 def vinipuh(poem):
     vowels_str = poem.translate(dict.fromkeys(map(ord, u"бвгджзйклмнпрстфхцчшщ-")))     # в виде строки получаем гласные каждого отдельного слога(удалением согласных)
-    poem_list = list(vowels_str.split(' '))                                             # строку в список
+    vowels_to_list = list(vowels_str.split(' '))                                             # строку в список
+    result = all(vowels_to_list[i] == vowels_to_list[i+1] for i in range(len(vowels_to_list) - 1))     # сравниваем все элементы списка all() -> true/false
     
-    result = all(poem_list[i] == poem_list[i+1] for i in range(len(poem_list) - 1))     # сравниваем все элементы списка all() -> true/false
     if result:
         return print('Парам пам-пам')
     else: print('Пам парам')
 
 vinipuh(poem)
+
+
+
+
+
+
+
+# Задача 36: Напишите функцию вывода таблицы умножения print_operation_table(operation, num_rows=6, num_columns=6), 
+# которая принимает в качестве аргумента функцию, вычисляющую элемент по номеру строки и столбца. 
+# Аргументы num_rows и num_columns указывают число строк и столбцов таблицы, которые должны быть распечатаны. 
+# Нумерация строк и столбцов идет с единицы (подумайте, почему не с нуля). 
+# Примечание: бинарной операцией называется любая операция, у которой ровно два аргумента, как, например, у операции умножения.
+
+# *Пример:*
+
+# **Ввод:** `print_operation_table(lambda x, y: x * y) ` 
+# **Вывод:**
+# 1  2  3  4  5  6
+# 2  4  6  8 10 12
+# 3  6  9 12 15 18
+# 4  8 12 16 20 24
+# 5 10 15 20 25 30
+# 6 12 18 24 30 36
+
+
+
+def print_operation_table(operation, num_rows=6, num_columns=6):
+    for i in range(1, num_rows + 1):
+        pre_table = []
+        for j in range(1, num_columns + 1):
+            pre_table.append(str(operation(i, j)))
+        print("\t".join(pre_table))
+
+print_operation_table(lambda x, y: x * y)
